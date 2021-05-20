@@ -48,21 +48,12 @@ namespace Examen2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->SuspendLayout();
-			// 
-			// MyForm
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 261);
-			this->Name = L"MyForm";
+			this->components = gcnew System::ComponentModel::Container();
+			this->Size = System::Drawing::Size(300,300);
 			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
-			this->ResumeLayout(false);
-
+			this->Padding = System::Windows::Forms::Padding(0);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 		}
 #pragma endregion
-	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
 	};
 }
