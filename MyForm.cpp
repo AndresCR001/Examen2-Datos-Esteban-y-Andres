@@ -8,7 +8,7 @@ using namespace Examen2; // se le puede cambiar el nombre a la clase
 
 [STAThread]
 
-int main(array<String^>^ arg) {
+int main(int argc, char* argv[]) {
 
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
