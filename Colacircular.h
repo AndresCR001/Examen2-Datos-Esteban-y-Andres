@@ -1,36 +1,53 @@
 #pragma once
-//
-// Created by Esteb on 5/27/2021.
-//
-
-#ifndef EXAMEN2_COLACIRCULAR_H
-#define EXAMEN2_COLACIRCULAR_H
-
 #include <stdlib.h>
-
-#define MAXTAMQ 7000
-typedef struct {
-    int listaCola[MAXTAMQ];
-    int frente, final;
-}Cola;
-int siguiente(int n) {
-    return (n + 1) % MAXTAMQ;
-}
-void crearCola(Cola* cola) {
-    cola->frente = 0;
-    cola->final = MAXTAMQ - 1;
-}
-int colaLlena(Cola cola) {
-    return  cola.frente == siguiente(siguiente(cola.frente));
-}
-void insertarEncola(Cola* cola, int entrada) { //entrada es el num aleatorio
-    if (colaLlena(*cola)) {
-        exit(1);
+#include "nodo.h"
+class Cola {
+public:
+    nodo* primero;
+    nodo* ultimo;
+    Cola() {
+        primero = NULL; //declaro primero y últimos como nulos
+        ultimo = NULL;
     }
-    cola->final = siguiente(cola->final);
-    cola->listaCola[cola->final] = entrada;
+    void llenarCola(int  cantidad); //llena la cola Circular con la cantidad de enteros que yo quiera
+    void imprimirCola(); //imprime la cola para ver el funcionamiento correcto de los ordenamientos pero se puede omitir
+private:
+    void insertarcola(int dato);
+};
+
+
+void Cola::insertarcola(int dato)
+{
+    nodo* nuevo = new nodo(dato); //creo un nodo con el dato que quiero de entrada
+    if (primero == NULL) { //si primero es nulo siginifica que no se ha empezado a llenar
+        primero = ultimo = nuevo; //el nuevo nodo es igual al primero y al último de la cola circular
+        primero->siguiente = primero; //el primero pasa a ser igual al siguiente
+    }
+    else { //cuando ya se ha creado
+        ultimo->siguiente = nuevo; // nuevo es igual al último siguiente (porque es circular)
+        nuevo->siguiente = primero; //el primero pasará a ser al siguiente del nuevo
+        ultimo = nuevo;
+    }
+}
+void Cola::llenarCola(int cantidad) {
+    /*
+     * Funcion que me llena la cola con la cantidad de números aleatorios que le ingrese
+     * Entrada:La cantidad de aleatorios
+     * Salida: la cola llena de muchos random
+     * */
+    for (int i = 0; i < cantidad; i++) {
+        int aleatorio = rand();
+        insertarcola(aleatorio);
+    }
+}
+void Cola::imprimirCola() {
+    /*
+    * Funcion que me imprime la cola
+    */
+    nodo* actual = primero;
+    do {
+        cout << actual->numero << endl;
+        actual = actual->siguiente;
+    } while (actual != primero);
 
 }
-
-
-#endif //EXAMEN2_COLACIRCULAR_H

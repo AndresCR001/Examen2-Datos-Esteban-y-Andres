@@ -121,13 +121,15 @@
     <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlgoritmosTDA.h" />
     <ClInclude Include="Colacircular.h" />
+    <ClInclude Include="Lista.h" />
+    <ClInclude Include="ListaDoblementeEnlazada.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="nodo.h" />
-    <ClInclude Include="Ordenamiento.h" />
+    <ClInclude Include="Ordenamientos.h" />
+    <ClInclude Include="Pila.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">

@@ -1,14 +1,20 @@
 #pragma once
-#include "Colacircular.h"
-#include "AlgoritmosTDA.h"
-#include "nodo.h"
-#include "Ordenamiento.h"
 #include <ctime>
 #include <string.h>
-#define CANTIDAD 7000
+
+#include <iostream>
+#include "Lista.h"
+#include "Ordenamientos.h"
+#include "ListaDoblementeEnlazada.h"
+#include "Pila.h"
+#include "Colacircular.h"
+#include "nodo.h"
 
 
+#define CANTIDAD 1000
 
+
+using namespace std;
 namespace Examen2 {
 
 	using namespace System;
@@ -60,6 +66,8 @@ namespace Examen2 {
 	private: System::Windows::Forms::TextBox^ textBoxCola;
 	private: System::Windows::Forms::TextBox^ textBoxVectores;
 	private: System::Windows::Forms::TextBox^ textBoxListaEnlazadaDoble;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::TextBox^ txtEstado;
 
 
 
@@ -93,6 +101,8 @@ namespace Examen2 {
 			this->textBoxCola = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxVectores = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxListaEnlazadaDoble = (gcnew System::Windows::Forms::TextBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->txtEstado = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -113,7 +123,7 @@ namespace Examen2 {
 			// 
 			this->button1->BackColor = System::Drawing::Color::Crimson;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			static_cast<System::Byte>(0)));
 			this->button1->ForeColor = System::Drawing::SystemColors::ControlLight;
 			this->button1->Location = System::Drawing::Point(1457, 1044);
 			this->button1->Name = L"button1";
@@ -206,6 +216,8 @@ namespace Examen2 {
 			// 
 			// textBPila
 			// 
+			this->textBPila->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.900001F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->textBPila->Location = System::Drawing::Point(914, 284);
 			this->textBPila->Multiline = true;
 			this->textBPila->Name = L"textBPila";
@@ -216,7 +228,7 @@ namespace Examen2 {
 			// 
 			// textBoxCola
 			// 
-			this->textBoxCola->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.1F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->textBoxCola->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.900001F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBoxCola->Location = System::Drawing::Point(914, 432);
 			this->textBoxCola->Multiline = true;
@@ -227,8 +239,8 @@ namespace Examen2 {
 			// 
 			// textBoxVectores
 			// 
-			this->textBoxVectores->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			this->textBoxVectores->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.900001F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->textBoxVectores->Location = System::Drawing::Point(914, 570);
 			this->textBoxVectores->Multiline = true;
 			this->textBoxVectores->Name = L"textBoxVectores";
@@ -239,12 +251,33 @@ namespace Examen2 {
 			// 
 			// textBoxListaEnlazadaDoble
 			// 
+			this->textBoxListaEnlazadaDoble->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.900001F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->textBoxListaEnlazadaDoble->Location = System::Drawing::Point(1147, 698);
 			this->textBoxListaEnlazadaDoble->Multiline = true;
 			this->textBoxListaEnlazadaDoble->Name = L"textBoxListaEnlazadaDoble";
 			this->textBoxListaEnlazadaDoble->ReadOnly = true;
 			this->textBoxListaEnlazadaDoble->Size = System::Drawing::Size(275, 55);
 			this->textBoxListaEnlazadaDoble->TabIndex = 14;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(80, 1044);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(0, 32);
+			this->label7->TabIndex = 15;
+			this->label7->Click += gcnew System::EventHandler(this, &MyForm::label7_Click);
+			// 
+			// txtEstado
+			// 
+			this->txtEstado->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.900001F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->txtEstado->Location = System::Drawing::Point(67, 1118);
+			this->txtEstado->Name = L"txtEstado";
+			this->txtEstado->ReadOnly = true;
+			this->txtEstado->Size = System::Drawing::Size(375, 45);
+			this->txtEstado->TabIndex = 16;
 			// 
 			// MyForm
 			// 
@@ -253,6 +286,8 @@ namespace Examen2 {
 			this->AutoSize = true;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(1826, 1212);
+			this->Controls->Add(this->txtEstado);
+			this->Controls->Add(this->label7);
 			this->Controls->Add(this->textBoxListaEnlazadaDoble);
 			this->Controls->Add(this->textBoxVectores);
 			this->Controls->Add(this->textBoxCola);
@@ -288,107 +323,453 @@ private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void textBox4_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	unsigned t0, t1;
+	Ordenamiento* ordenar = new Ordenamiento(CANTIDAD);
+	Pila* pila = new Pila();
+	Cola* cola = new Cola();
+	ListaDoblementeEnlazada* listaDoble = new ListaDoblementeEnlazada();
+	Lista* vector = new Lista();
+	double t0;
+	double t1;
 	double time;
-	int* vector;
-	Ordenamiento* ordenar = new Ordenamiento();
 	String^ strTime;
+	this->txtEstado->Text = "Llenando Pila...";
+	pila->LlenarPila(CANTIDAD);
+	this->txtEstado->Text = "Llenando Cola...";
+	cola->llenarCola(CANTIDAD);
+	this->txtEstado->Text = "Llenando Vector...";
+	vector->llenarLista();
+	this->txtEstado->Text = "Llenando Lista Doblemente Enlazada...";
+	listaDoble->llenarLista(CANTIDAD);
+
+	this->txtEstado->Clear();
 	switch (this->comboBAlgoritmos->SelectedIndex) {
 		
-		
-	   
 	case 0: //intercambio
 	{
-	// 	t0 = clock();
-	//	nodo* nodobase = InsertarEnListaDoblementeEnlazada(CANTIDAD);
-	//	ordenar->ordIntercambioPuntero(nodobase);
-	//	t1 = clock();//punto final del reloj
-	//	time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
-	//	strTime = time.ToString();
-	//	this->textBoxListaEnlazadaDoble->Text = strTime;
-		nodo* primero = InsertarEnListaDoblementeEnlazada(CANTIDAD);
-	int* vector = InsertarLista(CANTIDAD);
-	t0 = clock();
 
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
 
-	ordenar->bubblesortVector(vector);
+		t0 = clock();
+		ordenar->ordIntercambioPuntero(pila->primero); //Ordenamiento por intercambio puntero
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
 
+		delete pila;
 
-	t1 = clock();//punto final del reloj
-	time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
-	strTime = time.ToString();
-	this->textBoxVectores->Text = strTime;
-	break;
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->ordIntercambioPuntero(cola->primero);
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+
+		delete cola;
+
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->ordIntercambioVector(vector->lista);
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->ordIntercambioPuntero(listaDoble->primero);
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+
+		delete listaDoble;
 	}
+	break;
+	
 	case 1://selección
 	{
-		vector = InsertarLista(CANTIDAD);
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
+
 		t0 = clock();
-
-		ordenar->ordenSeleccionVector(vector);
-
+		ordenar->ordenSeleccionPuntero(pila->primero); //Ordenamientcambio puntero
 		t1 = clock();//punto final del reloj
 		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
-		strTime = time.ToString();
-		this->textBoxVectores->Text = strTime;
+		 strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
+
 	
+		delete pila;
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->ordenSeleccionPuntero(cola->primero); //Ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+
+		delete cola;
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->ordenSeleccionVector(vector->lista); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->ordenSeleccionPuntero(listaDoble->primero); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+
+		delete listaDoble;
 	}
 		break;
+	
 	case 2://inserción
 	{
-		vector = InsertarLista(CANTIDAD);
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
+
 		t0 = clock();
-
-		ordenar->ordenInsercionVector(vector);
-
+		ordenar->ordenInsercionVectorPuntero(pila->primero); //Ordenamientcambio puntero
 		t1 = clock();//punto final del reloj
 		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
-		strTime = time.ToString();
+		 strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
+		
+
+
+		delete pila;
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->ordenInsercionVectorPuntero(cola->primero); //Ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+
+
+		delete cola;
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->ordenInsercionVector(vector->lista); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
 		this->textBoxVectores->Text = strTime;
 
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->ordenInsercionVectorPuntero(listaDoble->primero); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+		
+		delete listaDoble;
 	}
 		break;
 	case 3://burbuja
-		vector = InsertarLista(CANTIDAD);
+	{
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
+
 		t0 = clock();
-
-		ordenar->bubblesortVector(vector);
-
+		ordenar->bubblesortPuntero(pila->primero); //Ordenamientcambio puntero
 		t1 = clock();//punto final del reloj
 		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
-		strTime = time.ToString();
+		 strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
+
+		delete pila;
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->bubblesortPuntero(cola->primero); //Ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+
+		delete cola;
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->bubblesortVector(vector->lista); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
 		this->textBoxVectores->Text = strTime;
+
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->bubblesortPuntero(listaDoble->primero); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+
+	
+		delete listaDoble;
+	
+	}
 		break;
 	case 4://shell
-		vector = InsertarLista(CANTIDAD);
+	{
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
+
 		t0 = clock();
-
-		ordenar->ordenShellVector(vector);
-
+		ordenar->ordenShellPuntero(pila->primero); //Ordenamientcambio puntero
 		t1 = clock();//punto final del reloj
 		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
-		strTime = time.ToString();
+		strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
+
+		
+		delete pila;
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->ordenShellPuntero(cola->primero); //Ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+
+		delete cola;
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->ordenShellVector(vector->lista); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
 		this->textBoxVectores->Text = strTime;
+
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->ordenShellPuntero(listaDoble->primero); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+
+	
+	
+		delete listaDoble;
+	}
 		break;
 	case 5://mergesort
+	{
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
 
+		t0 = clock();
+		ordenar->ordenInsercionVectorPuntero(pila->primero); //Ordenamientcambio puntero
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
+
+		delete pila;
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->ordenInsercionVectorPuntero(cola->primero); //Ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+
+		delete cola;
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->ordenInsercionVector(vector->lista); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->ordenInsercionVectorPuntero(listaDoble->primero); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+	
+		delete listaDoble;
+	}
 		break;
 	case 6://quicksort
+	{
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
 
+		t0 = clock();
+		ordenar->quickSortPuntero(pila->primero, 0, CANTIDAD-1); //Ordenamientcambio puntero
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
+
+		delete pila;
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->quickSortPuntero(cola->primero, 0, CANTIDAD-1); //Ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+
+		delete cola;
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->quickSortVector(vector->lista, 0, CANTIDAD-1); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+
+		vector->imprimirLista();
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->quickSortPuntero(listaDoble->primero,0, CANTIDAD-1); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+
+	
+		delete listaDoble;
+	
+	
+	
+	}
 		break;
 	case 7://binsort
+	{
 
+		t0 = clock();
+		ordenar->binSortPuntero(pila->primero);
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+		delete pila;
+
+		t0 = clock();
+		ordenar->bubblesortPuntero(cola->primero);
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+		delete cola;
+
+		t0 = clock();
+		ordenar->binSortVector(vector->lista);
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+		delete vector;
+
+		t0 = clock();
+		ordenar->binSortPuntero(listaDoble->primero);
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+		delete listaDoble;
+
+	}
 		break;
 	case 8://radixsort
+	{
+		//--------------------------------------PILA---------------------------------------------------//	
+		this->txtEstado->Text = "Ordenando Pila...";
 
+		t0 = clock();
+		ordenar->radixsortPuntero(pila->primero,CANTIDAD); //Ordenamientcambio puntero
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBPila->Text = strTime;
+
+		
+		delete pila;
+
+		//-----------------------------------------COLA------------------------------------------------//
+		this->txtEstado->Text = "Ordenando Cola...";
+		t0 = clock();
+		ordenar->radixsortPuntero(cola->primero, CANTIDAD); //Ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		 strTime = time.ToString() + "s";
+		this->textBoxCola->Text = strTime;
+		delete cola;
+		//------------------------------------------VECTORES-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Vector...";
+		t0 = clock();
+		ordenar->radixsortVector(vector->lista, CANTIDAD); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxVectores->Text = strTime;
+		delete vector;
+		//------------------------------------------LISTA DOBLEMENTE ENLAZADA-----------------------------------------------//
+		this->txtEstado->Text = "Ordenando Lista doblemente enlazada...";
+		t0 = clock();
+		ordenar->radixsortPuntero(listaDoble->primero,CANTIDAD); //ordenamiento
+		t1 = clock();//punto final del reloj
+		time = (double(t1 - t0) / CLOCKS_PER_SEC);//convierto a segundos
+		strTime = time.ToString() + "s";
+		this->textBoxListaEnlazadaDoble->Text = strTime;
+		delete listaDoble;
+	}
 		break;
 	}
+	this->txtEstado->Text = "Terminado";
+
 }
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 
 
 }
 private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label7_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

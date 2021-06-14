@@ -1,14 +1,10 @@
 #pragma once
-//
-// Created by Esteb on 6/6/2021.
-//
-
-#ifndef EXAMEN2_NODO_H
-#define EXAMEN2_NODO_H
 #include <iostream>
 using namespace std;
 struct nodo {
-    double numero;
+    nodo() {
+    }
+    int numero;
     nodo* siguiente;
     nodo* anterior;
 
@@ -18,8 +14,16 @@ struct nodo {
         anterior = NULL;
     }
 
-
 }*primero, * ultimo;
 
-
-#endif //PRUEBASPROYECTO_NODO_H
+nodo* nodobuscar(nodo* primero, int indice) {
+    /*
+     * Funcion que busca el nodo que marca el indice
+     */
+    nodo* actual = new nodo();
+    actual = primero;
+    for (int i = 0; i < indice; i++) { //cuente hasta el índice, ese será el nodo
+        actual = actual->siguiente; //pase el siguiente a cualquiera para que sea el proximo actual
+    }
+    return  actual; //retorne el nodo que quedó
+}
